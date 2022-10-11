@@ -1,0 +1,46 @@
+@startuml class
+
+class User {
+    id: String
+    name: String
+    surname: String
+    email: String
+    password: String
+    role: Role
+    status: Status
+    created: Date
+    updated: Date
+    posts: List<Post>
+}
+
+class Post {
+    id: String
+    title: String
+    content: String
+    created: Date
+    updated: Date
+    user: User
+}
+
+class Role {
+    id: String
+    name: String
+    users: List<User>
+}
+
+class Status {
+    id: String
+    name: String
+    users: List<User>
+}
+
+User "1" *-- "1..*" Post
+
+User "1" *-- "1..*" Role
+
+User "1" *-- "1..*" Status
+
+
+
+
+@enduml

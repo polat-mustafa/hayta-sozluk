@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  ul
+    each post in posts
+      li= 'Title: ' + post.title + ' | Content: ' + post.content + ' post id: ' + post.id
+        div
+          if post.user
+            a(href="/users/" + post.user.id) Author:   #{post.user.username}
+          else
+            span Author: Anonymous

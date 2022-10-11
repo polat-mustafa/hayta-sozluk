@@ -1,0 +1,11 @@
+extend layout
+
+block content
+
+    h1= title
+    p Welcome to #{title}
+    
+    ul
+        each user in users
+            a(href="/users/" + user.id)
+                li= user.username + " --- " + user.email

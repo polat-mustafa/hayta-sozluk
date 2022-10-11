@@ -1,0 +1,14 @@
+extend layout
+
+block content
+
+  ul
+    p Username: #{user.username}
+    p Email: #{user.email}
+    p Posts: Post length: #{user.posts.length}
+
+  ul
+    each post in user.posts
+      li= 'Title: ' + post.title + ' | Content: ' + post.content
+
+
