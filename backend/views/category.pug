@@ -1,0 +1,13 @@
+extends layout 
+
+block content
+
+    h1= title
+    ul
+        p Category Name: #{items.name}
+        p Category Posts: Post length: #{items.posts.length}
+
+    ul
+        each post in items.posts
+            li= 'Title: ' + post + ' | Content: ' + post.content + ' | Date: ' + post.date + ' | Category: ' + post.name
+            
