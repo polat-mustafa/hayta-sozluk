@@ -4,32 +4,38 @@ import { Link, Input } from "@chakra-ui/react";
 
 
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setLocation
+} from "../features/locations/index";
 
 const Navbar = () => {
 
   const location = useLocation();
-
-  const [locationPath, setLocationPath] = useState(location.pathname);
+  const dispatch = useDispatch();
+  const locations = useSelector((state) => state.location.location);
+  console.log("location", locations);
+  //const [locationPath, setLocationPath] = useState(location.pathname);
 
   useEffect(() => {
     //setLocationPath(location.pathname);
 
     if (location.pathname === "/") {
-      setLocationPath("Home");
+      dispatch(setLocation("home"));
     } else if (location.pathname === "/kanallar") {
-      setLocationPath("Kanallar");
+      dispatch(setLocation("channels"));
     } else if (location.pathname === "/bosisler") {
-      setLocationPath("Bosisler");
+      dispatch(setLocation("bosisler"));
     } else if (location.pathname === "/yazilim") {
-      setLocationPath("Yazilim");
+      dispatch(setLocation("yazilim"));
     } else if (location.pathname === "/gundem") {
-      setLocationPath("Gundem");
+      dispatch(setLocation("gundem"));
     }
 
 
-  }, [location]);
+  }, [location.pathname, dispatch]);
 
-  console.log("locationPath", locationPath);
+  //console.log("locationPath", locationPath);
 
   return (
     <>

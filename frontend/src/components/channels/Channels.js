@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react'
+import React from "react";
 import { Row, Col, Card } from "antd";
-import moment from 'moment';
-import {useNavigate} from 'react-router-dom';
+import moment from "moment";
 
+import { useNavigate } from "react-router-dom";
 
-const Bosisler = ({ users, posts, categories }) => {
-
+const Channels = ({ users, posts, categories }) => {
 
   const navigate = useNavigate();
 
@@ -20,10 +19,12 @@ const Bosisler = ({ users, posts, categories }) => {
   };
 
   const filtered = filterCategories("bosisler");
+
+
   return (
-    <div>
-            <>
-      <Row style={{
+
+      <>
+        <Row style={{
         height: "100%",
         width: "100%",
         marginTop: "20px"
@@ -59,12 +60,11 @@ const Bosisler = ({ users, posts, categories }) => {
                         cursor: "pointer",
                         color: "orange",
                         fontWeight: "bold",
-                        fontSize: "13px",
                       }}
                     >
                       {filterUsersById(post.posts[0].user) && filterUsersById(post.posts[0].user)}
                     </div>
-                    <div style={{ fontSize: "10px" }}>{moment(post.date).format("DD MM YYYY hh:mm:ss")}</div>
+                    <div>{moment(post.date).format("DD MM YYYY hh:mm:ss")}</div>
                   </div>
                 </Card>
               );
@@ -72,9 +72,9 @@ const Bosisler = ({ users, posts, categories }) => {
         </Col>
         <Col span={4} style={{backgroundColor: "blue"}}>col-8</Col>
       </Row>
-    </>
-    </div>
-  )
+      </>
+
+  );
 }
 
-export default Bosisler
+export default Channels;

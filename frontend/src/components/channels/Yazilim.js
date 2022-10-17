@@ -3,35 +3,22 @@ import { Row, Col, Card } from "antd";
 import moment from 'moment';
 import {useNavigate} from 'react-router-dom';
 
-import { fetchAllCategories } from '../../features/categories';
-import { fetchAllUsers } from '../../features/users';
-import { useDispatch, useSelector } from 'react-redux';
 
-const Bosisler = () => {
+const Yazilim = ({ users, posts, categories }) => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const dispatch = useDispatch();
-    const categories = useSelector((state) => state.category.categories);
-    const users = useSelector((state) => state.user.users);
+  const filterCategories = (name) => {
+    const filtered = categories && categories.data.filter((category) => category.name === name);
+    return filtered;
+  };
 
-    useEffect(() => {
-        dispatch(fetchAllCategories());
-        dispatch(fetchAllUsers());
-    }, [dispatch]);
+  const filterUsersById = (id) => {
+    const filtered = users.data.filter((user) => user._id === id);
+    return filtered.length > 0 ? filtered[0].username : null;
+  };
 
-    const filterCategories = (name) => {
-      const filtered = categories.filter((category) => category.name === name);
-      return filtered;
-    };
-
-    const filterUsersById = (id) => {
-      const filtered = users.filter((user) => user._id === id);
-      return filtered.length > 0 ? filtered[0].username : null;
-    };
-
-
-    const filtered = filterCategories("yazılım");
+  const filtered = filterCategories("yazılım");
 
   return (
     <div>
@@ -89,4 +76,4 @@ const Bosisler = () => {
   )
 }
 
-export default Bosisler
+export default Yazilim

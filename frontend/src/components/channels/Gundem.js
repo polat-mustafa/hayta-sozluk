@@ -1,31 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Row, Col, Card } from "antd";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
-import { fetchAllCategories } from "../../features/categories";
-import { fetchAllUsers } from "../../features/users";
-import { useDispatch, useSelector } from "react-redux";
 
-const Gundem = () => {
+const Gundem = ({ users, posts, categories }) => {
+
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  const categories = useSelector((state) => state.category.categories);
-  const users = useSelector((state) => state.user.users);
-
-  useEffect(() => {
-    dispatch(fetchAllCategories());
-    dispatch(fetchAllUsers());
-  }, [dispatch]);
-
   const filterCategories = (name) => {
-    const filtered = categories.filter((category) => category.name === name);
+    const filtered = categories && categories.data.filter((category) => category.name === name);
     return filtered;
   };
 
   const filterUsersById = (id) => {
-    const filtered = users.filter((user) => user._id === id);
+    const filtered = users.data.filter((user) => user._id === id);
     return filtered.length > 0 ? filtered[0].username : null;
   };
 
@@ -73,12 +62,13 @@ const Gundem = () => {
                           cursor: "pointer",
                           color: "orange",
                           fontWeight: "bold",
+                          fontSize: "13px",
                         }}
                       >
                         {filterUsersById(post.posts[0].user) &&
                           filterUsersById(post.posts[0].user)}
                       </div>
-                      <div>
+                      <div  style={{ fontSize: "10px" }}>
                         {moment(post.date).format("DD MM YYYY hh:mm:ss")}
                       </div>
                     </div>
