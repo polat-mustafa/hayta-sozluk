@@ -25,6 +25,19 @@ router.get('/search', async (req, res) => {
     }
 });
 
+router.get('/pages/:page', async (req, res) => {
+    try {
+        const page = req.params.page;
+        const posts = await postService.getPostPage(page);
+        res.json(posts);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Something went wrong');
+        res.json({ message: err });
+    }
+});
+
+
 router.get('/:id', async (req, res) => {
     try {
         const post = await postService.get(req.params.id);

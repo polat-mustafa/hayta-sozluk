@@ -7,6 +7,8 @@ const api = axios.create({
 // user apis
 const getAllUsers = () => api.get('/users');
 
+const getFetchLimitUsers = (limit) => api.get(`/pages/${limit}`);
+
 const getUserById = (id) => api.get(`/users/${id}`);
 
 const insertUser = (payload) => api.post(`/users`, payload);
@@ -18,6 +20,8 @@ const deleteUserById = (id) => api.delete(`/users/${id}`);
 
 // post apis
 const getAllPosts = () => api.get('/posts');
+
+const getFetchLimitPosts = (limit) => api.get(`posts/pages/${limit = 2}`);
 
 const getPostById = (id) => api.get(`/posts/${id}`);
 
@@ -35,7 +39,9 @@ const getAllCategories = () => api.get('/categories');
 
 const getCategoryById = (id) => api.get(`/categories/${id}`);
 
+// mockapi news apis
 
+const getNews = () => axios.get('https://630dba6bb37c364eb70a0cc5.mockapi.io/news');
 
 export {
     getAllUsers,
@@ -50,7 +56,10 @@ export {
     deletePostById,
     getPostsByUserId,
     getAllCategories,
-    getCategoryById
+    getCategoryById,
+    getNews,
+    getFetchLimitUsers,
+    getFetchLimitPosts
 }
 
 

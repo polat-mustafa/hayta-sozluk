@@ -1,5 +1,4 @@
 import "./App.css";
-
 import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
 import Footer from "./pages/Footer";
@@ -19,25 +18,42 @@ import { store } from "./features/index";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useQuery } from "@tanstack/react-query";
 
-import { getAllUsers, getAllPosts, getAllCategories } from "./api/index";
+import { getAllUsers, getAllPosts, getAllCategories, getNews, getFetchLimitPosts } from "./api/index";
 import Channels from "./components/channels/Channels";
 function App() {
+
+
   const {
-    data: users
+    data: users,
   } = useQuery(["users"], getAllUsers, {
-    refetchOnWindowFocus: false, // don't refetch on window focus
+    refetchOnWindowFocus: false,
   });
+
+  
   const {
     data: posts
   } = useQuery(["posts"], getAllPosts, {
-    refetchOnWindowFocus: false, // don't refetch on window focus
+    refetchOnWindowFocus: false, 
   });
 
   const {
     data: categories
   } = useQuery(["categories"], getAllCategories, {
-    refetchOnWindowFocus: false, // don't refetch on window focus
+    refetchOnWindowFocus: false, 
   });
+
+  const {
+    data: news
+  } = useQuery(["news"], getNews, {
+    refetchOnWindowFocus: false, 
+  });
+
+  const { 
+    data: postsLimit 
+  } = useQuery(["postsLimit"], getFetchLimitPosts, {
+    refetchOnWindowFocus: false,
+  });
+
 
   return (
     <div className="App">
@@ -46,7 +62,7 @@ function App() {
           <BrowserRouter>
             <Navbar />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home news={news} postsLimit={postsLimit} categories={categories}/>} />
               <Route
                 path="/user/:id"
                 element={
@@ -54,6 +70,7 @@ function App() {
                     users={users}
                     posts={posts}
                     categories={categories}
+                    news={news}
                   />
                 }
               />
@@ -64,6 +81,7 @@ function App() {
                     users={users}
                     posts={posts}
                     categories={categories}
+                    news={news}
                   />
                 }
               />
@@ -74,13 +92,14 @@ function App() {
                     users={users}
                     posts={posts}
                     categories={categories}
+                    news={news}
                   />
                 }
               />
               <Route
                 path="/gundem"
                 element={
-                  <Gundem users={users} posts={posts} categories={categories} />
+                  <Gundem users={users} posts={posts} categories={categories}  news={news}/>
                 }
               />
               <Route
@@ -90,6 +109,7 @@ function App() {
                     users={users}
                     posts={posts}
                     categories={categories}
+                    news={news}
                   />
                 }
               />

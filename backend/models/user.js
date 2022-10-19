@@ -15,6 +15,8 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    createdAt: { type: Date, default: Date.now() },
+    avatar: { type: String, default: 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y' },
     posts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',

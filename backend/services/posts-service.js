@@ -38,6 +38,13 @@ class PostService extends BaseService {
         return post;
     }
 
+    async getPostPage(page) {
+        const posts = await this.getAll();
+        const sortByDates = posts.sort((a, b) => b.date - a.date).reverse();
+        const getPageLimitPosts = sortByDates.slice((0), page);
+        return getPageLimitPosts;
+    }
+
 
 }
 

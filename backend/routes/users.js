@@ -13,6 +13,22 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/pages/:page', async (req, res) => {
+    try{
+        const page = req.params.page;
+        const users = await userService.getPage(page);
+        res.json(users);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Something went wrong');
+        res.json({ message: err });
+    }
+});
+
+
+
+
+
 router.get('/:id', async (req, res) => {
     try{
         const user = await userService.get(req.params.id);
