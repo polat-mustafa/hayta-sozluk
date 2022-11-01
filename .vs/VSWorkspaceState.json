@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\frontend",
+    "\\frontend\\src",
+    "\\frontend\\src\\api",
+    "\\frontend\\src\\components",
+    "\\frontend\\src\\components\\channels",
+    "\\frontend\\src\\features",
+    "\\frontend\\src\\features\\posts"
+  ],
+  "SelectedNode": "\\frontend\\src\\components\\channels\\Yazilim.js",
+  "PreviewInSolutionExplorer": false
+}

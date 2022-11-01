@@ -2,6 +2,10 @@ const { userService, postService } = require('../services');
 
 const router = require('express').Router();
 
+// Validate and middleware
+const validate = require('../middleware');
+const schema = require('../validations');
+
 router.get('/', async (req, res) => {
     try{
         const users = await userService.getAll();
@@ -45,7 +49,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', validate(schema), async (req, res) => {
     try {
         const user = await userService.create(req.body);
         res.json(user);
