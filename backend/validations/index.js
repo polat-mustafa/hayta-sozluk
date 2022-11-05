@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const schema = Joi.object({
+const userValidation = Joi.object({
     username: Joi.string().required().min(2).max(30),
     password: Joi.string().required().min(6).max(30),
     email: Joi.string().email().required(),
@@ -8,6 +8,14 @@ const schema = Joi.object({
     posts: Joi.array()
 });
 
+const loginValidation = Joi.object({
+    password: Joi.string().required().min(6).max(30),
+    email: Joi.string().email().required(),
+});
 
-module.exports = schema
+
+module.exports = {
+    userValidation,
+    loginValidation
+}
 

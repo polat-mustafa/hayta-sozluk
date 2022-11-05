@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         ref: 'Post',
         autopopulate: { maxDepth: 1 },
     }]
-});
+}, { timestamps: true, versionKey: false });
 
 userSchema.plugin(require('mongoose-autopopulate'));
 

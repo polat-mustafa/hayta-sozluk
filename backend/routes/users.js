@@ -4,7 +4,7 @@ const router = require('express').Router();
 
 // Validate and middleware
 const validate = require('../middleware');
-const schema = require('../validations');
+const { userValidation } = require('../validations');
 
 router.get('/', async (req, res) => {
     try{
@@ -49,8 +49,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', validate(schema), async (req, res) => {
+router.post('/', validate(userValidation), async (req, res) => {
     try {
+        req.body.password = encryptPassword(req.body.password);
         const user = await userService.create(req.body);
         res.json(user);
     } catch (err) {
