@@ -1,7 +1,9 @@
+const auth = require('../middleware/auth');
+
 const router = require('express').Router();
 
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         res.render('index')
     } catch (err) {

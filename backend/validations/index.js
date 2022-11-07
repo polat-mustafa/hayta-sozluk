@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const userValidation = Joi.object({
-    username: Joi.string().required().min(2).max(30),
+    username: Joi.string().required().min(2).max(200),
     password: Joi.string().required().min(6).max(30),
     email: Joi.string().email().required(),
     avatar: Joi.string().uri(),

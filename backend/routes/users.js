@@ -1,10 +1,11 @@
 const { userService, postService } = require('../services');
-
+const { encryptPassword} = require('../scripts/utils/helper');
 const router = require('express').Router();
 
 // Validate and middleware
 const validate = require('../middleware');
 const { userValidation } = require('../validations');
+const auth = require('../middleware/auth');
 
 router.get('/', async (req, res) => {
     try{
@@ -49,7 +50,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', validate(userValidation), async (req, res) => {
+router.post('/', auth, validate(userValidation), async (req, res) => {
     try {
         req.body.password = encryptPassword(req.body.password);
         const user = await userService.create(req.body);
@@ -58,10 +59,10 @@ router.post('/', validate(userValidation), async (req, res) => {
         res.status(400).json(err);
         res.json({ message: err.message });
     }
-
+    
 });
 
-router.post('/:id', async (req, res) => {
+router.post('/:id', auth, async (req, res) => {
     try {
         const { id } = req.params;
         const { content, category } = req.body;
