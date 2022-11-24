@@ -39,9 +39,18 @@ const getAllCategories = () => api.get('/categories');
 
 const getCategoryById = (id) => api.get(`/categories/${id}`);
 
-// mockapi news apis
+// Dummyjson news apis
 
-const getNews = () => axios.get('https://630dba6bb37c364eb70a0cc5.mockapi.io/news');
+const getNews = () => axios.get('https://dummyjson.com/users');
+
+//SignIn request api
+
+const signIn = (payload) => api.post(`/login`, payload);
+
+//Register request api
+
+const register = (payload) => api.post(`/register`, payload);
+
 
 export {
     getAllUsers,
@@ -59,7 +68,9 @@ export {
     getCategoryById,
     getNews,
     getFetchLimitUsers,
-    getFetchLimitPosts
+    getFetchLimitPosts,
+    signIn,
+    register
 }
 
 

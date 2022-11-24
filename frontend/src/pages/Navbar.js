@@ -1,41 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import { Link, Input } from "@chakra-ui/react";
+import { Link, Image } from "@chakra-ui/react";
+import SearchModal from "../components/Search/SearchModal";
 
-
-import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setLocation
-} from "../features/locations/index";
-
-const Navbar = () => {
-
-  const location = useLocation();
-  const dispatch = useDispatch();
-  const locations = useSelector((state) => state.location.location);
-  console.log("location", locations);
-  //const [locationPath, setLocationPath] = useState(location.pathname);
-
-  useEffect(() => {
-    //setLocationPath(location.pathname);
-
-    if (location.pathname === "/") {
-      dispatch(setLocation("home"));
-    } else if (location.pathname === "/kanallar") {
-      dispatch(setLocation("channels"));
-    } else if (location.pathname === "/bosisler") {
-      dispatch(setLocation("bosisler"));
-    } else if (location.pathname === "/yazilim") {
-      dispatch(setLocation("yazilim"));
-    } else if (location.pathname === "/gundem") {
-      dispatch(setLocation("gundem"));
-    }
+const Navbar = ({ categories }) => {
 
 
-  }, [location.pathname, dispatch]);
-
-  //console.log("locationPath", locationPath);
 
   return (
     <>
@@ -80,25 +50,16 @@ const Navbar = () => {
           </span>
         </span>{" "}
       </Link>
-
-      <Input
-        placeholder="Search"
-        style={{
-          width: "300px",
-          height: "35px",
+        <div style={{
           background: "rgba(255, 255, 255, 0.2)",
-          margin: "16px 24px 16px 0",
+          margin: "10px 34px 16px 0",
+          width: "100px",
+          height: "35px",
           float: "left",
           borderRadius: "5px",
-          underline: "none",
-          textDecoration: "none",
-          color: "orange",
-          fontWeight: "revert-layer",
-          fontFamily: "cursive",
-          
-          
-        }}
-      />
+        }}>
+      <SearchModal categories={categories} />
+      </div>
 
       <Link
         href="/bosisler"

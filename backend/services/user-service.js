@@ -10,8 +10,8 @@ class UserService extends BaseService {
 
     }
 
-    async login({ email, password }) {
-        const user = await this.findByEmail(email);
+    async login({ username, password }) {
+        const user = await this.findByUsername(username);
         if (!user) {
             throw new Error('User not found');
         }
@@ -23,6 +23,14 @@ class UserService extends BaseService {
 
         return user;
     }
+
+    async register (user) {
+        const { username, password, email } = user;
+        const hashedPassword = encryptPassword(password);
+        const newUser = await this.create({ username, password: hashedPassword, email });
+        return newUser;
+    }
+
 
 
     

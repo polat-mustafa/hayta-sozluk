@@ -22,16 +22,31 @@ export const fetchUserById = createAsyncThunk(
 
 const initialState = {
     users: [],
-    user: {},
+    user: {
+        username: "",
+        password: ""
+    },
     posts: [],
     status: "idle",
     error: null
 };
 
-const usersSlice = createSlice({
+export const usersSlice = createSlice({
     name: "users",
     initialState,
-    reducers: {},
+    reducers: {
+        loginUser(state, action) {
+            const { username, password } = action.payload;
+            state.user.username = username;
+            state.user.password = password;
+
+                
+
+        },
+        logoutUser(state, action) {
+            state.user = {};
+        }
+    },
     extraReducers: {
         [fetchAllUsers.pending]: (state, action) => {
             state.status = "loading";
@@ -58,4 +73,5 @@ const usersSlice = createSlice({
     }
 });
 
-export default usersSlice.reducer;
+export default usersSlice.reducer; 
+export const { loginUser, logoutUser } = usersSlice.actions;

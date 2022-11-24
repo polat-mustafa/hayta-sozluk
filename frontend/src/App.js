@@ -20,6 +20,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getAllUsers, getAllPosts, getAllCategories, getNews, getFetchLimitPosts } from "./api/index";
 import Channels from "./components/channels/Channels";
+import SignIn from "./components/auth/SignIn";
+import Register from "./components/auth/Register";
 function App() {
 
 
@@ -47,7 +49,7 @@ function App() {
   } = useQuery(["news"], getNews, {
     refetchOnWindowFocus: false, 
   });
-
+  
   const { 
     data: postsLimit 
   } = useQuery(["postsLimit"], getFetchLimitPosts, {
@@ -60,7 +62,7 @@ function App() {
       <Provider store={store}>
         <ChakraProvider>
           <BrowserRouter>
-            <Navbar />
+            <Navbar categories={categories} />
             <Routes>
               <Route path="/" element={<Home news={news} postsLimit={postsLimit} categories={categories}/>} />
               <Route
@@ -113,6 +115,8 @@ function App() {
                   />
                 }
               />
+              <Route path="/login" element={<SignIn />} />
+              <Route path="/register" element={<Register />} />
             </Routes>
             <Footer />
           </BrowserRouter>

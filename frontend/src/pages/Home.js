@@ -18,7 +18,8 @@ const Home = ({ news, postsLimit, categories }) => {
     return a;
   }, {});
 
-
+  // news limit
+  const newsLimit = news && news.data.users.slice(0, 3);
 
   return (
     <>
@@ -110,15 +111,16 @@ const Home = ({ news, postsLimit, categories }) => {
         </Col>
         <Col span={4}>
               {
-                news ? news.data.map((item, index) => {
+                news ? newsLimit.map((item, index) => {
                   return (
                     <Card
                     key={index}
                     hoverable
                     style={{ width: 240 }}
-                    cover={<img alt="example" src={item.avatar} />}
+                    cover={<img alt="example" src={item.image} />}
                   >
-                    <Meta title={moment(item.createdAt).format("DD MM YYYY hh:mm:ss")} description="news" />
+                    <Meta title={item.username} description="news" />
+                    {item.firstName} {item.lastName}
                   </Card>
                   )
                 }) : null

@@ -32,6 +32,11 @@ const Bosisler = ({ users, posts, categories, news }) => {
     }, {});
 
   const filtered = filterCategories("bosisler");
+
+  // news limit
+  const newsLimit = news && news.data.users.slice(0, 3);
+
+
   return (
     <div>
       <>
@@ -121,21 +126,17 @@ const Bosisler = ({ users, posts, categories, news }) => {
           <Col span={4}>
             {" "}
             {news
-              ? news.data.map((item, index) => {
+              ? newsLimit.map((item, index) => {
                   return (
                     <Card
-                      key={index}
-                      hoverable
-                      style={{ width: 240 }}
-                      cover={<img alt="example" src={item.avatar} />}
-                    >
-                      <Meta
-                        title={moment(item.createdAt).format(
-                          "DD MM YYYY hh:mm:ss"
-                        )}
-                        description="news"
-                      />
-                    </Card>
+                    key={index}
+                    hoverable
+                    style={{ width: 240 }}
+                    cover={<img alt="example" src={item.image} />}
+                  >
+                    <Meta title={item.username} description="news" />
+                    {item.firstName} {item.lastName}
+                  </Card>
                   );
                 })
               : null}

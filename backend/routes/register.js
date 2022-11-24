@@ -1,15 +1,15 @@
 const { generateToken, verifyToken } = require('../scripts/utils/helper');
-const { loginValidation } = require('../validations');
+const { registerValidation } = require('../validations');
 const validate = require('../middleware');
 const router = require('express').Router();
 
 const { userService } = require('../services');
 
-// LOGIN ROUTE
-router.post('/', validate(loginValidation), async (req, res) => {
+// REGISTER ROUTE
+router.post('/', validate(registerValidation), async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const user = await userService.login({ username, password })
+        
+        const user = await userService.register(req.body);
         const accessToken = generateToken(user);
         const refreshToken = verifyToken(user);
 
@@ -22,7 +22,7 @@ router.post('/', validate(loginValidation), async (req, res) => {
         }
 
         res.json(userWithToken);
-
+        console.log("new user ==>", userWithToken);
     } catch (err) {
         res.status(400).json(err);
         res.json({ message: err.message });
