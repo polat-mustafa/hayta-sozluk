@@ -1,11 +1,19 @@
 import React from "react";
 
-import { Link, Image } from "@chakra-ui/react";
+import { Link, Image, Button } from "@chakra-ui/react";
 import SearchModal from "../components/Search/SearchModal";
 
 const Navbar = ({ categories }) => {
 
-
+  const handleMode = () => {
+    const storage = localStorage.getItem("chakra-ui-color-mode");
+    if (storage === "light") {
+      localStorage.setItem("chakra-ui-color-mode", "dark");
+    } else {
+      localStorage.setItem("chakra-ui-color-mode", "light");
+    }
+    window.location.reload();
+  };
 
   return (
     <>
@@ -16,7 +24,6 @@ const Navbar = ({ categories }) => {
         style={{
           width: "100px",
           height: "35px",
-          background: "rgba(255, 255, 255, 0.2)",
           margin: "16px 24px 16px 0",
           float: "left",
           borderRadius: "5px",
@@ -28,7 +35,7 @@ const Navbar = ({ categories }) => {
         {" "}
         <span
           style={{
-            color: "black",
+            color: localStorage.getItem("chakra-ui-color-mode") === "light" ? "#000000" : "#FFFFFF",
             fontWeight: "bold",
             fontFamily: "cursive",
             width: "100%",
@@ -51,7 +58,6 @@ const Navbar = ({ categories }) => {
         </span>{" "}
       </Link>
         <div style={{
-          background: "rgba(255, 255, 255, 0.2)",
           margin: "10px 34px 16px 0",
           width: "100px",
           height: "35px",
@@ -66,7 +72,6 @@ const Navbar = ({ categories }) => {
         style={{
           width: "100px",
           height: "35px",
-          background: "rgba(255, 255, 255, 0.2)",
           margin: "20px 34px 16px 0",
           float: "left",
           borderRadius: "5px",
@@ -86,7 +91,6 @@ const Navbar = ({ categories }) => {
         style={{
           width: "100px",
           height: "35px",
-          background: "rgba(255, 255, 255, 0.2)",
           margin: "20px 24px 16px 0",
           float: "left",
           borderRadius: "5px",
@@ -106,7 +110,6 @@ const Navbar = ({ categories }) => {
         style={{
           width: "100px",
           height: "35px",
-          background: "rgba(255, 255, 255, 0.2)",
           margin: "20px 24px 16px 0",
           float: "left",
           borderRadius: "5px",
@@ -128,6 +131,9 @@ const Navbar = ({ categories }) => {
           float: "right",
         }}
       >
+        <Button colorScheme="orange" variant="ghost" onClick={() => handleMode()} style={{color: 'orange'}} >
+          Dark & Light
+        </Button>
         <Link
           href="/login"
           style={{

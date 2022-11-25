@@ -4,12 +4,12 @@ import moment from "moment";
 import { Card, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
 import unidecode from "unidecode";
+import { Text } from "@chakra-ui/react";
 
 const Home = ({ news, postsLimit, categories }) => {
 
   const navigate = useNavigate();
 
-  const { Meta } = Card;
 
   const groupByCategory = categories && categories.data.reduce((a, e) => {
     let estKey = (e['name']); 
@@ -18,8 +18,7 @@ const Home = ({ news, postsLimit, categories }) => {
     return a;
   }, {});
 
-  // news limit
-  const newsLimit = news && news.data.users.slice(0, 3);
+
 
   return (
     <>
@@ -37,7 +36,7 @@ const Home = ({ news, postsLimit, categories }) => {
             color: "orange",
             textAlign: "center",
             marginBottom: "20px",
-          }}>En son boş başlıklar</h1>
+          }}>Taze başlıklar</h1>
 
           <ul style={{
             listStyle: "none",
@@ -46,6 +45,7 @@ const Home = ({ news, postsLimit, categories }) => {
             color: "orange",
             fontSize: "15px",
             fontWeight: "bold",
+
           }}>
             {
               groupByCategory && Object.keys(groupByCategory).map((category, index) => {
@@ -59,14 +59,14 @@ const Home = ({ news, postsLimit, categories }) => {
           </ul>
         </Col>
         <Col span={16}>
-          <h1 style={{ 
+          <Text style={{ 
             float: "right",
-            fontSize: "30px",
+            fontSize: "20px",
             fontWeight: "bold",
-            color: "#000",
+            color: localStorage.getItem("chakra-ui-color-mode") === "light" ? "#000000" : "#FFFFFF",
             fontFamily: "monospace",
             margin: "20px",
-           }}>Yapılan en son boşlar</h1>
+           }}>Yapılan en son boşlar</Text>
 
           {postsLimit &&
             postsLimit.data.map((post, index) => {
@@ -77,6 +77,9 @@ const Home = ({ news, postsLimit, categories }) => {
                     width: "100%",
                     display: "flex",
                     justifyContent: "flex-end",
+                    backgroundColor: localStorage.getItem("chakra-ui-color-mode") === "light" ? "#FFFFFF" : '#1A202C',
+                    color: localStorage.getItem("chakra-ui-color-mode") === "light" ? "#000000" : '#FFFFFF',
+                    border: "none",
                   }}
                 >
                   <div>{post.content}</div>
@@ -109,23 +112,7 @@ const Home = ({ news, postsLimit, categories }) => {
               );
             })}
         </Col>
-        <Col span={4}>
-              {
-                news ? newsLimit.map((item, index) => {
-                  return (
-                    <Card
-                    key={index}
-                    hoverable
-                    style={{ width: 240 }}
-                    cover={<img alt="example" src={item.image} />}
-                  >
-                    <Meta title={item.username} description="news" />
-                    {item.firstName} {item.lastName}
-                  </Card>
-                  )
-                }) : null
-              }
-        </Col>
+
       </Row>
     </>
   );

@@ -26,7 +26,7 @@ function SearchModal() {
     const categoriess = useSelector(state => state.category.categories)
 
 
-    const [searchResult, setSearchResult] = useState()
+    const [searchResult, setSearchResult] = useState('#')
 
     console.log("category", categoriess);
     console.log("searchResult", searchResult);
@@ -39,16 +39,19 @@ function SearchModal() {
     const searchValue = e;
     const searchName = categoriess.map(category => category.name)
     const searchResults = searchName.filter(name => unidecode(name).toLowerCase().includes(unidecode(searchValue).toLowerCase()))
-    setSearchResult(searchResults);
+    console.log("searchResults", searchResults);
+    setSearchResult(searchResults[0]);
   };
 
 
+  const uniCode = searchResult && unidecode(searchResult)
 
+    
 
     return (
       <>
         
-        <Button onClick={onOpen} variant='ghost' colorScheme="orange">&#x1F50E; Search</Button>
+        <Button onClick={onOpen} variant='ghost' style={{color: 'orange'}} _hover='none'>&#x1F50E; Search</Button>
   
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -66,7 +69,7 @@ function SearchModal() {
           color: "orange",
           fontWeight: "revert-layer",
           fontFamily: "cursive",
-          margin: "0 auto"
+          margin: "0 auto",
 
         }}
         onChange={(e) => {
@@ -76,8 +79,8 @@ function SearchModal() {
             <ModalCloseButton />
             <ModalBody>
               {
-                categoriess ? <Link href={`
-                /${searchResult && unidecode(searchResult[0])}
+                searchResult !== [] && <Link href={`
+                /${uniCode}
                 `} style={{textDecoration: "none"}}><span style={{
                   color: "orange",
                   fontWeight: "bold",
@@ -88,8 +91,8 @@ function SearchModal() {
                   display: "flex",
 
                 }}>{
-                  searchResult && searchResult[0]
-                }</span></Link> : null
+                  searchResult && searchResult
+                }</span></Link> 
               }
 
             </ModalBody>
