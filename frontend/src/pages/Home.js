@@ -93,7 +93,7 @@ const Home = ({ news, postsLimit, categories }) => {
                   >
                     <div
                       onClick={() => {
-                        navigate(`/users/${post.user._id}`);
+                        navigate(`/user/${post.user._id}`);
                       }}
                       style={{
                         cursor: "pointer",

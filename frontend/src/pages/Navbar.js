@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Link, Image, Button } from "@chakra-ui/react";
+import { Link, Button } from "@chakra-ui/react";
 import SearchModal from "../components/Search/SearchModal";
+
 
 const Navbar = ({ categories }) => {
 
@@ -14,6 +15,8 @@ const Navbar = ({ categories }) => {
     }
     window.location.reload();
   };
+
+  const userData = JSON.parse(localStorage.getItem("user"));
 
   return (
     <>
@@ -35,7 +38,10 @@ const Navbar = ({ categories }) => {
         {" "}
         <span
           style={{
-            color: localStorage.getItem("chakra-ui-color-mode") === "light" ? "#000000" : "#FFFFFF",
+            color:
+              localStorage.getItem("chakra-ui-color-mode") === "light"
+                ? "#000000"
+                : "#FFFFFF",
             fontWeight: "bold",
             fontFamily: "cursive",
             width: "100%",
@@ -57,14 +63,16 @@ const Navbar = ({ categories }) => {
           </span>
         </span>{" "}
       </Link>
-        <div style={{
+      <div
+        style={{
           margin: "10px 34px 16px 0",
           width: "100px",
           height: "35px",
           float: "left",
           borderRadius: "5px",
-        }}>
-      <SearchModal categories={categories} />
+        }}
+      >
+        <SearchModal categories={categories} />
       </div>
 
       <Link
@@ -131,37 +139,61 @@ const Navbar = ({ categories }) => {
           float: "right",
         }}
       >
-        <Button colorScheme="orange" variant="ghost" onClick={() => handleMode()} style={{color: 'orange'}} >
+        <Button
+          colorScheme="orange"
+          variant="ghost"
+          onClick={() => handleMode()}
+          style={{ color: "orange" }}
+        >
           Dark & Light
         </Button>
-        <Link
-          href="/login"
-          style={{
-            marginRight: "20px",
-            color: "orange",
-            textDecoration: "none",
-            fontWeight: "bold",
-            fontFamily: "cursive",
-            fontSize: "15px",
-            cursor: "pointer",
-          }}
-        >
-          Giriş Yap
-        </Link>
-        <Link
-          href="/register"
-          style={{
-            marginRight: "20px",
-            color: "orange",
-            textDecoration: "none",
-            fontWeight: "bold",
-            fontFamily: "cursive",
-            fontSize: "15px",
-            cursor: "pointer",
-          }}
-        >
-          Kayıt Ol
-        </Link>
+        {userData ? (
+          <Link
+            href={`/user/${userData?._id}`}
+            style={{
+              marginRight: "20px",
+              color: "orange",
+              textDecoration: "none",
+              fontWeight: "bold",
+              fontFamily: "cursive",
+              fontSize: "15px",
+              cursor: "pointer",
+            }}
+          >
+            Profil
+          </Link>
+        ) : (
+          <>
+            <Link
+              href="/login"
+              style={{
+                marginRight: "20px",
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                fontFamily: "cursive",
+                fontSize: "15px",
+                cursor: "pointer",
+              }}
+            >
+              Giriş Yap
+            </Link>
+            <Link
+              href="/register"
+              style={{
+                marginRight: "20px",
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                fontFamily: "cursive",
+                fontSize: "15px",
+                cursor: "pointer",
+              }}
+            >
+              Kayıt Ol
+            </Link>
+          </>
+        )}
       </div>
     </>
   );

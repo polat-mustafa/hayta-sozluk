@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Footer from "./pages/Footer";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UserDetail from "./components/UserDetail";
+import UserDetail from "./components/user/UserDetail";
 import Bosisler from "./components/channels/Bosisler";
 import Yazilim from "./components/channels/Yazilim";
 import Gundem from "./components/channels/Gundem";

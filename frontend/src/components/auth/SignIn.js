@@ -1,15 +1,12 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginUser } from '../../features/users';
 import { signIn } from '../../api';
 
 const SignIn = () => {
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user.user);
-  console.log("user", user);
 
   const onFinish = (values) => {
 
@@ -17,6 +14,7 @@ const SignIn = () => {
       console.log("response", response.data);
       dispatch(loginUser(values));
       localStorage.setItem("user", JSON.stringify(response.data));
+      window.location.href = "/";
     })
     console.log("response", response);
 
